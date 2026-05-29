@@ -252,3 +252,156 @@ export interface RecipeUpdate {
   process_type?: string
   is_active?: boolean
 }
+
+// ---------------------------------------------------------------------------
+// Yield Analysis types (Phase 4)
+// ---------------------------------------------------------------------------
+
+export interface YieldProduct {
+  id: string
+  name: string
+  product_code: string
+  description?: string
+  is_active: boolean
+  created_at: string
+}
+
+export interface YieldStep {
+  id: string
+  name: string
+  sequence_order: number
+  description?: string
+}
+
+export interface YieldLossCategory {
+  id: string
+  name: string
+  color: string
+  description?: string
+}
+
+export interface YieldLossRecord {
+  id: string
+  category_id: string
+  category_name: string
+  color: string
+  loss_pct: number
+  notes?: string
+}
+
+export interface YieldRecord {
+  id: string
+  lot_id: string
+  product_id: string
+  product_name: string
+  product_code: string
+  step_id: string
+  step_name: string
+  measurement_date: string
+  yield_pct: number
+  wafer_in?: number
+  wafer_out?: number
+  die_per_wafer?: number
+  good_die?: number
+  notes?: string
+  loss_records: YieldLossRecord[]
+  creator_name: string
+  created_at: string
+}
+
+export interface YieldRecordListResponse {
+  items: YieldRecord[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface TrendRecord {
+  record_id: string
+  lot_id: string
+  date: string
+  yield_pct: number
+}
+
+export interface SpcPoint {
+  lot_id: string
+  date: string
+  value: number
+  mr?: number
+  out_of_control: boolean
+}
+
+export interface SpcData {
+  points: SpcPoint[]
+  mean: number
+  std: number
+  ucl: number
+  lcl: number
+  mr_ucl: number
+  cp?: number
+  cpk?: number
+}
+
+export interface SummaryStats {
+  count: number
+  mean: number
+  std: number
+  min: number
+  max: number
+  p25: number
+  p50: number
+  p75: number
+  cp?: number
+  cpk?: number
+  yield_target?: number
+}
+
+export interface ParetoItem {
+  category_name: string
+  color: string
+  total_loss_pct: number
+  record_count: number
+}
+
+export interface YieldRecordCreate {
+  lot_id: string
+  product_id: string
+  step_id: string
+  measurement_date: string
+  yield_pct: number
+  wafer_in?: number
+  wafer_out?: number
+  die_per_wafer?: number
+  good_die?: number
+  notes?: string
+  loss_records: { category_id: string; loss_pct: number; notes?: string }[]
+}
+
+export interface YieldRecordUpdate {
+  lot_id?: string
+  measurement_date?: string
+  yield_pct?: number
+  wafer_in?: number
+  wafer_out?: number
+  die_per_wafer?: number
+  good_die?: number
+  notes?: string
+}
+
+export interface YieldProductCreate {
+  name: string
+  product_code: string
+  description?: string
+}
+
+export interface YieldStepCreate {
+  name: string
+  sequence_order?: number
+  description?: string
+}
+
+export interface YieldLossCategoryCreate {
+  name: string
+  color?: string
+  description?: string
+}

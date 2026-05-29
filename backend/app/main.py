@@ -8,10 +8,12 @@ from app.database import create_tables, AsyncSessionLocal
 from app.models.user import User, UserRole
 from app.models import sop as _sop_models  # noqa: F401 – ensure SOP models are registered
 from app.models import process as _process_models  # noqa: F401 – ensure Process models are registered
+from app.models import yield_model as _yield_models  # noqa: F401 – ensure Yield models are registered
 from app.core.security import get_password_hash
 from app.api.v1 import auth, users
 from app.api.v1 import sop as sop_router
 from app.api.v1 import process as process_router
+from app.api.v1 import yield_api as yield_router
 
 
 @asynccontextmanager
@@ -19,6 +21,7 @@ async def lifespan(app: FastAPI):
     # Startup: ensure upload directory exists
     os.makedirs("/app/uploads/sop", exist_ok=True)
     os.makedirs("/app/uploads/process", exist_ok=True)
+    os.makedirs("/app/uploads/yield", exist_ok=True)
     # Create tables and seed default admin
     await create_tables()
     await seed_default_admin()
@@ -66,6 +69,7 @@ app.include_router(auth.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")
 app.include_router(sop_router.router, prefix="/api/v1")
 app.include_router(process_router.router, prefix="/api/v1")
+app.include_router(yield_router.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["健康檢查"])

@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
 import SOP from './pages/SOP'
 import Process from './pages/Process'
+import Yield from './pages/Yield'
 import AppLayout from './components/Layout'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="sop" element={<SOP />} />
             <Route path="process" element={<Process />} />
+            <Route path="yield" element={<Yield />} />
             <Route
               path="users"
               element={

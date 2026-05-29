@@ -60,10 +60,9 @@ function AppLayout() {
       label: '製程參數',
     },
     {
-      key: '/yield-analysis',
+      key: '/yield',
       icon: <BarChartOutlined />,
       label: '良率分析',
-      disabled: true,
     },
     {
       key: '/equipment',
