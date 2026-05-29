@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
+import SOP from './pages/SOP'
 import AppLayout from './components/Layout'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           >
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
+            <Route path="sop" element={<SOP />} />
             <Route
               path="users"
               element={

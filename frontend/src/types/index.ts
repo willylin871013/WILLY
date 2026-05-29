@@ -45,6 +45,73 @@ export interface ApiError {
   detail: string
 }
 
+// ---------------------------------------------------------------------------
+// SOP Knowledge Base types
+// ---------------------------------------------------------------------------
+
+export interface SopCategory {
+  id: string
+  name: string
+  description?: string
+  created_at: string
+  doc_count?: number
+}
+
+export interface SopTag {
+  id: string
+  name: string
+}
+
+export interface SopVersion {
+  id: string
+  document_id: string
+  version: string
+  file_name?: string
+  change_notes?: string
+  created_at: string
+  creator_name?: string
+}
+
+export interface SopDocument {
+  id: string
+  title: string
+  description?: string
+  content?: string
+  category?: SopCategory
+  tags: SopTag[]
+  version: string
+  file_name?: string
+  file_size?: number
+  creator_name: string
+  created_at: string
+  updated_at: string
+  is_active: boolean
+  versions?: SopVersion[]
+}
+
+export interface SopDocumentCreate {
+  title: string
+  description?: string
+  content?: string
+  category_id?: string
+  tags?: string[]
+}
+
+export interface SopDocumentUpdate {
+  title?: string
+  description?: string
+  content?: string
+  category_id?: string
+  tags?: string[]
+}
+
+export interface SopListResponse {
+  items: SopDocument[]
+  total: number
+  page: number
+  size: number
+}
+
 export interface AuthState {
   user: User | null
   token: string | null

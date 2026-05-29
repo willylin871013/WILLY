@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -5,13 +6,17 @@ from sqlalchemy import select
 from app.config import settings
 from app.database import create_tables, AsyncSessionLocal
 from app.models.user import User, UserRole
+from app.models import sop as _sop_models  # noqa: F401 – ensure SOP models are registered
 from app.core.security import get_password_hash
 from app.api.v1 import auth, users
+from app.api.v1 import sop as sop_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: create tables and seed default admin
+    # Startup: ensure upload directory exists
+    os.makedirs("/app/uploads/sop", exist_ok=True)
+    # Create tables and seed default admin
     await create_tables()
     await seed_default_admin()
     yield
@@ -56,6 +61,7 @@ app.add_middleware(
 # Routers
 app.include_router(auth.router, prefix="/api/v1")
 app.include_router(users.router, prefix="/api/v1")
+app.include_router(sop_router.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["健康檢查"])

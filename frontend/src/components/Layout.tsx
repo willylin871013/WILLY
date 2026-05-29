@@ -53,7 +53,6 @@ function AppLayout() {
       key: '/sop',
       icon: <FileTextOutlined />,
       label: 'SOP知識庫',
-      disabled: true,
     },
     {
       key: '/process-params',
