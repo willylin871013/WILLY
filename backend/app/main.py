@@ -16,6 +16,7 @@ from app.api.v1 import sop as sop_router
 from app.api.v1 import process as process_router
 from app.api.v1 import yield_api as yield_router
 from app.api.v1 import equipment as equipment_router
+from app.api.v1 import dashboard as dashboard_router
 
 
 @asynccontextmanager
@@ -74,6 +75,7 @@ app.include_router(sop_router.router, prefix="/api/v1")
 app.include_router(process_router.router, prefix="/api/v1")
 app.include_router(yield_router.router, prefix="/api/v1")
 app.include_router(equipment_router.router, prefix="/api/v1")
+app.include_router(dashboard_router.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["健康檢查"])

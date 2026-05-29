@@ -585,3 +585,72 @@ export interface PmCompleteRequest {
   notes?: string
   maintenance_record_id?: string
 }
+
+// ---------------------------------------------------------------------------
+// Dashboard types (Phase 6)
+// ---------------------------------------------------------------------------
+
+export interface DashboardYieldStats {
+  avg_7d: number
+  avg_30d: number
+  records_30d: number
+  below_90_count: number
+}
+
+export interface DashboardEquipmentStats {
+  total: number
+  normal: number
+  alarm_or_down: number
+  alarms_24h: number
+  critical_alarms_7d: number
+  downtime_hours_7d: number
+  overdue_pms: number
+  upcoming_pms_7d: number
+}
+
+export interface DashboardProcessStats {
+  runs_7d: number
+  out_of_spec_runs_7d: number
+}
+
+export interface DashboardSopStats {
+  total_docs: number
+  updated_7d: number
+}
+
+export interface DashboardSummary {
+  yield: DashboardYieldStats
+  equipment: DashboardEquipmentStats
+  process: DashboardProcessStats
+  sop: DashboardSopStats
+}
+
+export interface RecentAlarm {
+  id: string
+  equipment_name: string
+  severity: AlarmSeverity
+  title: string
+  occurred_at: string
+}
+
+export interface RecentYieldRecord {
+  id: string
+  lot_id: string
+  product_name: string
+  step_name: string
+  yield_pct: number
+  measurement_date: string
+}
+
+export interface OverduePm {
+  id: string
+  equipment_name: string
+  pm_name: string
+  next_pm_date: string
+  days_overdue: number
+}
+
+export interface YieldTrendDay {
+  date: string
+  avg_yield: number | null
+}
