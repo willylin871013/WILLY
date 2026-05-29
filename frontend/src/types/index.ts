@@ -405,3 +405,183 @@ export interface YieldLossCategoryCreate {
   color?: string
   description?: string
 }
+
+// ---------------------------------------------------------------------------
+// Equipment Management types (Phase 5)
+// ---------------------------------------------------------------------------
+
+export type EquipmentStatus = 'normal' | 'alarm' | 'down' | 'maintenance' | 'pm'
+export type AlarmSeverity = 'low' | 'medium' | 'high' | 'critical'
+export type MaintenanceType = 'repair' | 'pm' | 'calibration' | 'inspection'
+
+export interface Equipment {
+  id: string
+  name: string
+  equipment_id: string
+  equipment_type: string
+  location?: string
+  status: EquipmentStatus
+  description?: string
+  is_active: boolean
+  created_at: string
+  alarm_count: number
+  recent_alarms: AlarmRecordBrief[]
+}
+
+export interface AlarmRecordBrief {
+  id: string
+  title: string
+  severity: AlarmSeverity
+  occurred_at: string
+  resolved_at?: string
+}
+
+export interface AlarmRecord {
+  id: string
+  equipment_id: string
+  equipment_name: string
+  alarm_code?: string
+  alarm_type?: string
+  severity: AlarmSeverity
+  title: string
+  description: string
+  occurred_at: string
+  resolved_at?: string
+  downtime_minutes?: number
+  root_cause?: string
+  corrective_action?: string
+  reported_by_name: string
+  resolved_by_name?: string
+  created_at: string
+}
+
+export interface AlarmListResponse {
+  items: AlarmRecord[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface MaintenanceRecord {
+  id: string
+  equipment_id: string
+  equipment_name: string
+  maintenance_type: MaintenanceType
+  title: string
+  description: string
+  start_time: string
+  end_time?: string
+  engineer_name?: string
+  parts_replaced?: string
+  cost?: number
+  result?: string
+  created_at: string
+}
+
+export interface MaintenanceListResponse {
+  items: MaintenanceRecord[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface PmSchedule {
+  id: string
+  equipment_id: string
+  equipment_name: string
+  pm_name: string
+  interval_days: number
+  last_pm_date?: string
+  next_pm_date?: string
+  estimated_duration_hours?: number
+  procedure_notes?: string
+  days_until_pm: number
+  is_overdue: boolean
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface EquipmentStats {
+  total_alarms_30d: number
+  critical_alarms_30d: number
+  total_downtime_hours_30d: number
+  upcoming_pms: number
+  overdue_pms: number
+}
+
+export interface GlobalEquipmentStats {
+  total_equipment: number
+  normal_count: number
+  alarm_count: number
+  down_count: number
+  maintenance_count: number
+  pm_count: number
+  total_alarms_30d: number
+  critical_alarms_30d: number
+  total_downtime_hours_30d: number
+  upcoming_pms: number
+  overdue_pms: number
+}
+
+export interface EquipmentCreate {
+  name: string
+  equipment_id: string
+  equipment_type: string
+  location?: string
+  status?: EquipmentStatus
+  description?: string
+}
+
+export interface AlarmCreate {
+  equipment_id: string
+  alarm_code?: string
+  alarm_type?: string
+  severity: AlarmSeverity
+  title: string
+  description: string
+  occurred_at: string
+  downtime_minutes?: number
+}
+
+export interface AlarmUpdate {
+  alarm_code?: string
+  alarm_type?: string
+  severity?: AlarmSeverity
+  title?: string
+  description?: string
+  occurred_at?: string
+  resolved_at?: string
+  downtime_minutes?: number
+  root_cause?: string
+  corrective_action?: string
+  resolved_by?: number
+}
+
+export interface MaintenanceCreate {
+  equipment_id: string
+  maintenance_type: MaintenanceType
+  title: string
+  description: string
+  start_time: string
+  end_time?: string
+  engineer_id?: number
+  parts_replaced?: string
+  cost?: number
+  result?: string
+}
+
+export interface PmScheduleCreate {
+  equipment_id: string
+  pm_name: string
+  interval_days: number
+  last_pm_date?: string
+  estimated_duration_hours?: number
+  procedure_notes?: string
+}
+
+export interface PmCompleteRequest {
+  completed_date: string
+  notes?: string
+  maintenance_record_id?: string
+}

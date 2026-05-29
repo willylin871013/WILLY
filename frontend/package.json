@@ -16,7 +16,8 @@
     "antd": "^5.18.0",
     "@ant-design/icons": "^5.3.7",
     "axios": "^1.7.2",
-    "recharts": "^2.12.7"
+    "recharts": "^2.12.7",
+    "dayjs": "^1.11.10"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

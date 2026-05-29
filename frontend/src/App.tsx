@@ -7,6 +7,7 @@ import Users from './pages/Users'
 import SOP from './pages/SOP'
 import Process from './pages/Process'
 import Yield from './pages/Yield'
+import Equipment from './pages/Equipment'
 import AppLayout from './components/Layout'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="sop" element={<SOP />} />
             <Route path="process" element={<Process />} />
             <Route path="yield" element={<Yield />} />
+            <Route path="equipment" element={<Equipment />} />
             <Route
               path="users"
               element={

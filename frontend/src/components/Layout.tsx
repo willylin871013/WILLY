@@ -68,7 +68,6 @@ function AppLayout() {
       key: '/equipment',
       icon: <ToolOutlined />,
       label: '設備記錄',
-      disabled: true,
     },
     ...(user?.role === 'admin'
       ? [
