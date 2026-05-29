@@ -118,3 +118,137 @@ export interface AuthState {
   isAuthenticated: boolean
   isLoading: boolean
 }
+
+// ---------------------------------------------------------------------------
+// Process Parameter Management types (Phase 3)
+// ---------------------------------------------------------------------------
+
+export type ProcessType = 'CVD' | 'Etch' | 'CMP' | 'Diffusion' | 'PVD' | 'Lithography' | 'Other'
+
+export interface ProcessParameter {
+  id: string
+  recipe_id: string
+  name: string
+  unit?: string
+  spec_min?: number
+  spec_max?: number
+  target?: number
+  display_order: number
+}
+
+export interface ProcessRecipe {
+  id: string
+  name: string
+  description?: string
+  process_type: ProcessType
+  parameters: ProcessParameter[]
+  creator_name: string
+  created_at: string
+  updated_at: string
+  is_active: boolean
+}
+
+export interface ProcessRecipeListItem {
+  id: string
+  name: string
+  description?: string
+  process_type: ProcessType
+  parameter_count: number
+  creator_name: string
+  created_at: string
+  updated_at: string
+  is_active: boolean
+}
+
+export interface ProcessMeasurement {
+  id: string
+  parameter_id: string
+  parameter_name: string
+  unit?: string
+  spec_min?: number
+  spec_max?: number
+  target?: number
+  value: number
+  is_out_of_spec: boolean
+}
+
+export interface ProcessRun {
+  id: string
+  recipe_id: string
+  recipe_name: string
+  lot_id: string
+  run_date: string
+  operator_name?: string
+  notes?: string
+  measurements: ProcessMeasurement[]
+  out_of_spec_count: number
+  created_at: string
+}
+
+export interface ProcessRunListItem {
+  id: string
+  recipe_id: string
+  recipe_name: string
+  lot_id: string
+  run_date: string
+  operator_name?: string
+  notes?: string
+  out_of_spec_count: number
+  created_at: string
+}
+
+export interface ProcessRunListResponse {
+  items: ProcessRunListItem[]
+  total: number
+  page: number
+  size: number
+}
+
+export interface TrendPoint {
+  run_id: string
+  lot_id: string
+  run_date: string
+  value: number
+  is_out_of_spec: boolean
+}
+
+export interface BulkImportResult {
+  success_count: number
+  error_count: number
+  errors: string[]
+}
+
+export interface MeasurementInput {
+  parameter_id: string
+  value: number | string
+}
+
+export interface RunCreate {
+  recipe_id: string
+  lot_id: string
+  run_date: string
+  operator_id?: number
+  notes?: string
+  measurements: MeasurementInput[]
+}
+
+export interface RecipeCreate {
+  name: string
+  description?: string
+  process_type: string
+  parameters: {
+    name: string
+    unit?: string
+    spec_min?: number
+    spec_max?: number
+    target?: number
+    display_order: number
+  }[]
+}
+
+export interface RecipeUpdate {
+  name?: string
+  description?: string
+  process_type?: string
+  is_active?: boolean
+}

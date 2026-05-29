@@ -55,10 +55,9 @@ function AppLayout() {
       label: 'SOP知識庫',
     },
     {
-      key: '/process-params',
+      key: '/process',
       icon: <ControlOutlined />,
       label: '製程參數',
-      disabled: true,
     },
     {
       key: '/yield-analysis',
