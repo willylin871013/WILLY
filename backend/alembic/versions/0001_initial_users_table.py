@@ -31,7 +31,7 @@ def upgrade() -> None:
         sa.Column('hashed_password', sa.String(length=255), nullable=False),
         sa.Column(
             'role',
-            sa.Enum('admin', 'engineer', 'readonly', name='userrole'),
+            sa.Enum('admin', 'engineer', 'readonly', name='userrole', create_type=False),
             nullable=False,
         ),
         sa.Column('is_active', sa.Boolean(), nullable=False, server_default='true'),

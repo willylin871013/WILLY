@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr, field_validator
+from pydantic import BaseModel, field_validator
 from app.models.user import UserRole
 
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email: str
     password: str
 
 
@@ -20,7 +20,7 @@ class TokenData(BaseModel):
 
 
 class UserBase(BaseModel):
-    email: EmailStr
+    email: str
     full_name: str
     role: UserRole = UserRole.readonly
     is_active: bool = True
@@ -44,7 +44,7 @@ class UserCreate(UserBase):
 
 
 class UserUpdate(BaseModel):
-    email: Optional[EmailStr] = None
+    email: Optional[str] = None
     full_name: Optional[str] = None
     role: Optional[UserRole] = None
     is_active: Optional[bool] = None

@@ -22,10 +22,11 @@ from app.api.v1 import dashboard as dashboard_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: ensure upload directory exists
-    os.makedirs("/app/uploads/sop", exist_ok=True)
-    os.makedirs("/app/uploads/process", exist_ok=True)
-    os.makedirs("/app/uploads/yield", exist_ok=True)
-    os.makedirs("/app/uploads/equipment", exist_ok=True)
+    upload_base = settings.UPLOAD_DIR
+    os.makedirs(f"{upload_base}/sop", exist_ok=True)
+    os.makedirs(f"{upload_base}/process", exist_ok=True)
+    os.makedirs(f"{upload_base}/yield", exist_ok=True)
+    os.makedirs(f"{upload_base}/equipment", exist_ok=True)
     # Create tables and seed default admin
     await create_tables()
     await seed_default_admin()

@@ -11,6 +11,9 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
+    # Upload
+    UPLOAD_DIR: str = "/app/uploads"
+
     # App
     APP_NAME: str = "FAB System"
     APP_VERSION: str = "1.0.0"
