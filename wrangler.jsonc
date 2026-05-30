@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bodycut",
+  "compatibility_date": "2026-05-30",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "frontend"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
