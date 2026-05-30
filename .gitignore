@@ -49,3 +49,9 @@ frontend/coverage/
 # Database
 *.sqlite
 *.db
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
